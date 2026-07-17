@@ -10,35 +10,40 @@ de confianza — distinguiendo siempre hechos observables de inferencias.
 
 ## Estado
 
-🚧 En desarrollo activo, módulo por módulo. Todavía no está lista para instalar de
-forma definitiva. Ver el estado detallado abajo.
+🚧 **Alpha temprana.** El proyecto es funcional pero incompleto — se comparte en este
+estado a propósito, para recibir feedback temprano. No es todavía la versión que se
+va a difundir como v1.0.0.
 
-**Completo:**
-- `SKILL.md` — orquestador y definición del rol (QA independiente, no diseñador).
-- `references/review-framework.md` — vocabulario común de todo hallazgo: 7 campos
-  fijos (Tipo, Prioridad, Bloqueante, Confianza, Evidencia, Impacto, Recomendación).
-- `references/disciplines/civil-infrastructure.md` — solo el módulo **"Planos de
-  pavimento y cordón cuneta"** está desarrollado en profundidad.
+**Capacidades actuales:**
+- Ingesta nativa de PDF (sin scripts propios).
+- Marco de revisión completo: todo hallazgo usa 7 campos fijos (Tipo, Prioridad,
+  Bloqueante, Confianza, Evidencia, Impacto, Recomendación), con criterios objetivos
+  para determinar si un hallazgo bloquea la emisión del plano.
+- Un módulo de revisión completo y probado en profundidad: **planos de pavimento y
+  cordón cuneta** (obra civil e infraestructura).
+- Arquitectura modular pensada para sumar disciplinas nuevas (estructura,
+  arquitectura, instalaciones) sin reescribir nada existente.
 
-**Pendiente:**
-- Resto de los tipos de lámina de obra civil e infraestructura (desagües pluviales,
-  sumideros/cámaras/bocas de tormenta, perfiles longitudinales y transversales,
-  detalles constructivos, láminas combinadas, planos generales).
+**Planeado antes de v1.0.0:**
+- Módulos restantes de obra civil: desagües pluviales, sumideros/cámaras/bocas de
+  tormenta, perfiles longitudinales y transversales, detalles constructivos, láminas
+  combinadas, planos generales.
 - Los 5 checklists transversales (presentación, legibilidad, consistencia, calidad
   técnica, constructibilidad).
 - `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
   gráfica).
 - `references/report-template.md` (estructura del informe final).
-- `evals/evals.json` (casos de prueba).
+- Suite de evals (`evals/evals.json`) con casos de prueba.
 
-Otras disciplinas (estructura, arquitectura, instalaciones) están contempladas en la
-arquitectura pero no desarrolladas todavía — se suman como archivos nuevos en
-`references/disciplines/` sin modificar lo existente.
+Si probás la Skill ahora, tené en cuenta que solo el tipo de lámina "pavimento y
+cordón cuneta" tiene criterios específicos cargados — cualquier otro tipo de plano
+va a recibir una revisión más genérica hasta que se sume su módulo.
 
 ## Estructura
 
 ```
 technical-drawing-reviewer/
+├── LICENSE                               # MIT
 ├── SKILL.md                              # Orquestador: flujo y rol de la Skill
 └── references/
     ├── review-framework.md               # Vocabulario y estructura de hallazgos
@@ -48,9 +53,15 @@ technical-drawing-reviewer/
 
 ## Instalación
 
-Una vez que la Skill esté estable, se instala copiando (o symlinkeando) esta carpeta
-dentro de `~/.claude/skills/`:
-
 ```bash
+git clone https://github.com/<tu-usuario>/technical-drawing-reviewer.git
 cp -r technical-drawing-reviewer ~/.claude/skills/
 ```
+
+Reiniciá o abrí una sesión nueva de Claude Code para que detecte la Skill. Una vez
+instalada, se activa sola cuando le pedís que revise, audite o "dé el OK" a un plano
+en PDF — no hace falta invocarla por nombre.
+
+## Licencia
+
+[MIT](LICENSE) © 2026 Atenas Maini
