@@ -1,5 +1,9 @@
 # Technical Drawing Reviewer
 
+> This project is intended as a documentation quality assurance assistant.
+> It does not replace engineering judgment, professional review, or code
+> compliance verification.
+
 Skill para [Claude Code](https://claude.com/claude-code) que actúa como un revisor
 de Control de Calidad (QA) senior sobre planos de ingeniería y arquitectura
 exportados a PDF (típicamente desde AutoCAD, pero compatible con cualquier PDF de
@@ -50,6 +54,12 @@ technical-drawing-reviewer/
     └── disciplines/
         └── civil-infrastructure.md       # Criterios por tipo de lámina (civil/infra)
 ```
+
+## Ejemplo de revisión
+
+🚧 Pendiente — se va a agregar acá una captura o GIF de la Skill revisando un plano
+PDF real, más un extracto del informe generado, apenas se corra la primera prueba
+con un plano real.
 
 ## Instalación
 
