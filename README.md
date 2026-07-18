@@ -76,9 +76,48 @@ technical-drawing-reviewer/
 
 ## Ejemplo de revisión
 
-🚧 Pendiente — se va a agregar acá una captura o GIF de la Skill revisando un plano
-PDF real, más un extracto del informe generado, apenas se corra la primera prueba
-con un plano real.
+Extracto real de una revisión de un set de planos de un proyecto de relleno
+sanitario (obra vial + hidráulica + detalle de sumideros). La Skill detectó una
+contradicción entre dos láminas que un revisor humano podría pasar por alto por
+estar en lugares distintos del set:
+
+```
+Tipo: Error
+Prioridad: Crítica
+Bloqueante: Sí
+Confianza: Alta
+Evidencia: La leyenda "Referencias" (presente en dos láminas del set) indica que la
+superficie gris de calles y plataformas corresponde a "Superficie a colocar Ripio".
+Sin embargo, una de esas láminas incluye un detalle rotulado "BASE SUPERFICIAL (Bs)"
+que especifica 0.18m de espesor de Hormigón H21 con bombeo del 6% a cada lado,
+aplicado aparentemente a esa misma superficie.
+Impacto: No queda claro si la superficie de calzada a ejecutar es ripio (material
+suelto) u hormigón H21 (superficie rígida) — son dos soluciones constructivas
+completamente distintas en costo, plazo y método de ejecución. No se puede empezar a
+construir esta parte de la obra sin resolver la contradicción.
+Recomendación: Verificar con el proyectista cuál es el material real de la
+superficie y corregir la leyenda o el detalle, el que esté desactualizado, antes de
+emitir.
+```
+
+Y una sugerencia de mejora, no un error — la Skill también propone alternativas
+concretas cuando el título de una lámina es genérico:
+
+```
+Tipo: Mejora
+Prioridad: Baja
+Bloqueante: No
+Confianza: Alta
+Evidencia: El título de una de las láminas es "PROYECTO VIAL". El contenido real es
+una planta general con el trazado de calles internas, plataformas de acopio y sus
+radios de giro — no hay cortes, perfiles ni detalles.
+Recomendación: Considerar un título más específico, por ejemplo:
+- "PLANTA GENERAL — TRAZADO VIAL INTERNO Y PLATAFORMAS DE ACOPIO"
+- "PLANTA DE TRAZADO VIAL Y SECTORIZACIÓN DE RESIDUOS"
+- "PROYECTO VIAL — PLANTA GENERAL"
+```
+
+🚧 Falta agregar una captura o GIF del flujo completo corriendo en Claude Code.
 
 ## Instalación
 
