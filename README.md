@@ -19,12 +19,17 @@ estado a propósito, para recibir feedback temprano. No es todavía la versión 
 va a difundir como v1.0.0.
 
 **Capacidades actuales:**
-- Ingesta nativa de PDF (sin scripts propios).
+- Ingesta nativa de PDF, más un script (`scripts/check_legibility.py`) que mide
+  tamaño real de texto y grosor de línea a partir del PDF — la única verificación de
+  la Skill que se apoya en datos medidos en vez de en lectura visual.
 - Marco de revisión completo: todo hallazgo usa 7 campos fijos (Tipo, Prioridad,
   Bloqueante, Confianza, Evidencia, Impacto, Recomendación), con criterios objetivos
   para determinar si un hallazgo bloquea la emisión del plano.
 - Un módulo de revisión completo y probado en profundidad: **planos de pavimento y
   cordón cuneta** (obra civil e infraestructura).
+- 2 de los 5 checklists transversales: **presentación** (incluye propuesta de
+  títulos alternativos cuando el título de la lámina es genérico) y
+  **legibilidad**.
 - Arquitectura modular pensada para sumar disciplinas nuevas (estructura,
   arquitectura, instalaciones) sin reescribir nada existente.
 
@@ -32,8 +37,8 @@ va a difundir como v1.0.0.
 - Módulos restantes de obra civil: desagües pluviales, sumideros/cámaras/bocas de
   tormenta, perfiles longitudinales y transversales, detalles constructivos, láminas
   combinadas, planos generales.
-- Los 5 checklists transversales (presentación, legibilidad, consistencia, calidad
-  técnica, constructibilidad).
+- Los 3 checklists transversales restantes (consistencia, calidad técnica,
+  constructibilidad).
 - `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
   gráfica).
 - `references/report-template.md` (estructura del informe final).
@@ -49,11 +54,25 @@ va a recibir una revisión más genérica hasta que se sume su módulo.
 technical-drawing-reviewer/
 ├── LICENSE                               # MIT
 ├── SKILL.md                              # Orquestador: flujo y rol de la Skill
+├── scripts/
+│   ├── check_legibility.py               # Mide tamaño de texto y grosor de línea reales
+│   └── requirements.txt
 └── references/
     ├── review-framework.md               # Vocabulario y estructura de hallazgos
+    ├── checklist-presentation.md         # Rótulo, título, simbología, orientación
+    ├── checklist-legibility.md           # Legibilidad (usa scripts/check_legibility.py)
     └── disciplines/
         └── civil-infrastructure.md       # Criterios por tipo de lámina (civil/infra)
 ```
+
+## Dependencias
+
+- [Claude Code](https://claude.com/claude-code)
+- Python 3 + [PyMuPDF](https://pypi.org/project/PyMuPDF/), solo para el chequeo de
+  legibilidad:
+  ```bash
+  pip install -r scripts/requirements.txt
+  ```
 
 ## Ejemplo de revisión
 

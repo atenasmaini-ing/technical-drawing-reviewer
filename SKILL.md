@@ -44,9 +44,14 @@ el primer hallazgo, porque todo lo demás en esta Skill depende de ese vocabular
 
 ### 1. Ingesta del PDF
 
-Usá las herramientas nativas de Claude Code para leer el PDF (esta Skill no incluye
-scripts propios de procesamiento por ahora — si en el futuro aparece una limitación
-concreta de la lectura nativa, se evalúa agregar scripts como segunda etapa).
+Usá las herramientas nativas de Claude Code para leer y ver el PDF. Además, corré
+`scripts/check_legibility.py <archivo.pdf>` una vez por archivo — mide de forma
+objetiva el tamaño real de página, la altura real de cada texto (mm) y los grosores
+de línea vectoriales usados. Necesita `pip install -r scripts/requirements.txt`
+(PyMuPDF) la primera vez. Usá esos datos en el paso 3 al aplicar
+`checklist-legibility.md` — es la única verificación de esta Skill que se apoya en un
+script en vez de en lectura visual, porque medir legibilidad contra un mínimo
+requiere datos exactos, no una impresión.
 
 - Recorré **todas** las hojas del set, no solo la primera.
 - Si el PDF tiene muchas hojas, procesalas de a una o en tandas chicas para no perder
@@ -109,3 +114,8 @@ organizada así a propósito para poder sumar disciplinas nuevas sin reescribir 
   basados en buenas prácticas generales de ingeniería civil y se van a ir afinando
   con el uso real. Si en algún momento aparece un manual de estándares propio, se
   incorpora como referencia adicional sin tocar la estructura existente.
+- `scripts/check_legibility.py` es la única excepción a "sin scripts propios", y a
+  propósito: mide algo (tamaño real de texto y línea) que no se puede verificar de
+  forma objetiva solo mirando el PDF. Si aparece otra limitación concreta similar,
+  se evalúa agregar un script puntual para eso — no es una puerta abierta a
+  automatizar todo el proceso.
