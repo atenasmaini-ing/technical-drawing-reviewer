@@ -25,8 +25,10 @@ va a difundir como v1.0.0.
 - Marco de revisión completo: todo hallazgo usa 7 campos fijos (Tipo, Prioridad,
   Bloqueante, Confianza, Evidencia, Impacto, Recomendación), con criterios objetivos
   para determinar si un hallazgo bloquea la emisión del plano.
-- Un módulo de revisión completo y probado en profundidad: **planos de pavimento y
-  cordón cuneta** (obra civil e infraestructura).
+- Dos módulos de revisión completos y probados en profundidad (obra civil e
+  infraestructura): **planos de pavimento y cordón cuneta**, y **planos de
+  desagües pluviales** (conductos circulares/rectangulares, zanjas a cielo abierto,
+  reservorios de regulación, estructuras de orificio/vertedero).
 - **Los 5 checklists transversales completos**: presentación (incluye propuesta de
   títulos alternativos cuando el título de la lámina es genérico), legibilidad,
   consistencia (contradicciones internas y entre láminas del mismo set), calidad
@@ -36,17 +38,17 @@ va a difundir como v1.0.0.
   arquitectura, instalaciones) sin reescribir nada existente.
 
 **Planeado antes de v1.0.0:**
-- Módulos restantes de obra civil: desagües pluviales, sumideros/cámaras/bocas de
-  tormenta, perfiles longitudinales y transversales, detalles constructivos, láminas
-  combinadas, planos generales.
+- Módulos restantes de obra civil: sumideros/cámaras/bocas de tormenta, perfiles
+  longitudinales y transversales, detalles constructivos, láminas combinadas, planos
+  generales.
 - `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
   gráfica).
 - `references/report-template.md` (estructura del informe final).
 - Suite de evals (`evals/evals.json`) con casos de prueba.
 
-Si probás la Skill ahora, tené en cuenta que solo el tipo de lámina "pavimento y
-cordón cuneta" tiene criterios específicos cargados — cualquier otro tipo de plano
-va a recibir una revisión más genérica hasta que se sume su módulo.
+Si probás la Skill ahora, tené en cuenta que solo "pavimento y cordón cuneta" y
+"desagües pluviales" tienen criterios específicos cargados — cualquier otro tipo de
+plano va a recibir una revisión más genérica hasta que se sume su módulo.
 
 ## Estructura
 
