@@ -27,9 +27,9 @@ va a difundir como v1.0.0.
   para determinar si un hallazgo bloquea la emisión del plano.
 - Un módulo de revisión completo y probado en profundidad: **planos de pavimento y
   cordón cuneta** (obra civil e infraestructura).
-- 2 de los 5 checklists transversales: **presentación** (incluye propuesta de
-  títulos alternativos cuando el título de la lámina es genérico) y
-  **legibilidad**.
+- 3 de los 5 checklists transversales: **presentación** (incluye propuesta de
+  títulos alternativos cuando el título de la lámina es genérico), **legibilidad**
+  y **consistencia** (contradicciones internas y entre láminas del mismo set).
 - Arquitectura modular pensada para sumar disciplinas nuevas (estructura,
   arquitectura, instalaciones) sin reescribir nada existente.
 
@@ -37,8 +37,7 @@ va a difundir como v1.0.0.
 - Módulos restantes de obra civil: desagües pluviales, sumideros/cámaras/bocas de
   tormenta, perfiles longitudinales y transversales, detalles constructivos, láminas
   combinadas, planos generales.
-- Los 3 checklists transversales restantes (consistencia, calidad técnica,
-  constructibilidad).
+- Los 2 checklists transversales restantes (calidad técnica, constructibilidad).
 - `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
   gráfica).
 - `references/report-template.md` (estructura del informe final).
@@ -61,6 +60,7 @@ technical-drawing-reviewer/
     ├── review-framework.md               # Vocabulario y estructura de hallazgos
     ├── checklist-presentation.md         # Rótulo, título, simbología, orientación
     ├── checklist-legibility.md           # Legibilidad (usa scripts/check_legibility.py)
+    ├── checklist-consistency.md          # Contradicciones internas y entre láminas
     └── disciplines/
         └── civil-infrastructure.md       # Criterios por tipo de lámina (civil/infra)
 ```
