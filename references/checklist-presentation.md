@@ -23,6 +23,15 @@ explicación) es Omisión — usualmente Prioridad Alta porque afecta la validez
 profesional del documento, aunque no siempre sea Bloqueante en el sentido estricto
 de impedir la construcción (ver `review-framework.md`).
 
+**Excepción a tener en cuenta con el campo de escala**: si la lámina tiene varias
+vistas a escalas distintas (una planta a 1:25, una sección a 1:20, un detalle a
+1:10, por ejemplo), es válido y habitual que el campo "Escalas:" del rótulo quede
+genérico o vacío, **siempre que cada vista tenga su propia escala rotulada
+directamente junto a ella**. Eso no es una omisión — es la forma correcta de
+resolver una lámina con múltiples escalas, y marcarlo como falta sería un falso
+positivo. Sí es una omisión real si ni el rótulo ni ninguna vista indican su
+escala.
+
 ## Título del plano: no alcanza con que exista, tiene que orientar
 
 Un título genérico obliga a quien busca información a abrir el PDF para saber si es

@@ -40,6 +40,16 @@ juntas. Si el plano solo tiene perfil longitudinal sin sección tipo ni planta,
 probablemente corresponde al tipo "Perfiles longitudinales y transversales", no a
 este.
 
+No asumas que "cordón cuneta" es un único tipo de elemento: es habitual que un
+mismo proyecto tenga más de una variante, cada una con su propio detalle:
+**cordón simple** (solo el cordón vertical, sin losa de cuneta con pendiente —
+típico en canteros/medianas donde no hay calzada adyacente que drenar), **cordón
+cuneta propiamente dicho** (cordón + losa de cuneta con pendiente transversal
+propia, integrados en una sola sección) y **cordón montable** (perfil que permite
+que un vehículo lo cruce, usado en accesos o canteros transitables). Si la lámina
+muestra más de una variante, cada una necesita su propio detalle — no alcanza con
+uno solo "genérico".
+
 ### Objetivo del plano
 
 Definir, sin ambigüedad y de forma replanteable en obra, la geometría y la estructura
@@ -87,7 +97,17 @@ Si falta alguno de estos datos, es candidato fuerte a Omisión con Bloqueante: S
   "asfalto" — debe indicar resistencia (ej. H-21), tipo de mezcla asfáltica, o
   equivalente.
 - **Juntas de dilatación y contracción del cordón** (si es de hormigón): ubicación o
-  criterio de espaciamiento.
+  criterio de espaciamiento, **y la condición del extremo de la armadura en cada
+  tipo de junta** — en la de contracción el hierro suele ir con extremo empotrado
+  (fijo, porque esa junta no necesita absorber movimiento), en la de dilatación va
+  con extremo envainado y engrasado (libre para deslizar, porque esa junta sí tiene
+  que permitir que el hormigón se expanda). Si ambas juntas muestran el mismo
+  detalle de extremo, es candidato a Error: pierden su función si no se
+  diferencian.
+- **Armadura especificada para cada elemento estructural distinto de la sección**,
+  no un solo dato genérico para toda la sección: la losa de cuneta (si la hay) suele
+  llevar malla soldada, y el cordón/estribo suele llevar barras longitudinales +
+  estribos — son elementos distintos con solicitaciones distintas.
 - **Sentido de escurrimiento** de la calzada (flechas o pendientes que lo dejen
   inequívoco).
 - Rótulo completo: escala(s), norte, fecha, revisión — ver `checklist-presentation.md`.
@@ -110,7 +130,13 @@ Mejora:
   rápida sin tener que interpretar la sección tipo dibujada.
 - Referencia al ensayo de suelo (CBR, DPL) o al informe geotécnico que fundamenta el
   diseño estructural del paquete.
-- Nota de compactación requerida por capa (% Proctor).
+- Nota de compactación requerida por capa, idealmente con el ensayo de referencia
+  específico (ej. "densificación ≥ 95% de la Densidad máxima del Ensayo AASHO
+  T-99") en vez de solo decir "compactado" sin más dato — mientras más específica
+  la referencia normativa, menos ambigüedad para el control de obra.
+- Nota de sobreancho de excavación a considerar detrás de los cordones para el
+  cómputo métrico (ej. "0.20m en toda la obra") — evita disputas de certificación
+  entre lo excavado y lo computado.
 - Referencia cruzada explícita a las láminas de perfiles y de desagües pluviales del
   mismo tramo.
 
@@ -286,6 +312,9 @@ mirar esa lámina con más profundidad de lo habitual:
       genérico.
 - [ ] Las juntas de dilatación y contracción están indicadas, con criterio de
       espaciamiento razonable para el material.
+- [ ] La junta de dilatación muestra el hierro con extremo libre (envainado/
+      engrasado) y la de contracción con extremo fijo (empotrado) — no al revés,
+      y no el mismo detalle para ambas.
 - [ ] El sentido de escurrimiento está señalado sin ambigüedad.
 - [ ] Hay referencia cruzada a la lámina de desagües pluviales del mismo tramo (si
       existe un set de láminas relacionado).
@@ -365,6 +394,39 @@ que impide fijar niveles de rasante en los últimos 30 metros del tramo sin cons
 al proyectista.
 Recomendación: Verificar con el proyectista cuál de las dos progresivas finales es
 correcta y unificar planta y perfil antes de emitir.
+```
+
+```
+Tipo: Buena práctica
+Prioridad: N/A
+Bloqueante: No
+Confianza: Alta
+Evidencia: El detalle de juntas de la Lámina PC-03 distingue claramente los dos
+tipos: la junta de contracción muestra el hierro con extremo empotrado, mientras que
+la junta de dilatación lo muestra con extremo envainado y engrasado, con una nota
+aclarando el espacio libre para el movimiento. Además, incluye una nota específica
+de compactación de base ("densificación ≥ 95% del Ensayo AASHO T-99") y una nota de
+sobreancho de excavación para el cómputo métrico.
+Impacto: Elimina cualquier ambigüedad sobre cómo ejecutar cada tipo de junta —una
+tiene que poder moverse, la otra no— y deja explícita la referencia normativa de
+compactación en vez de una indicación genérica.
+Recomendación: Mantener este nivel de detalle en el resto de las láminas
+constructivas del proyecto.
+```
+
+```
+Tipo: Error
+Prioridad: Alta
+Bloqueante: No
+Confianza: Alta
+Evidencia: El detalle de la junta de dilatación de la Lámina PC-04 muestra el hierro
+liso con extremo empotrado, igual que la junta de contracción de la misma lámina.
+Impacto: Una junta de dilatación con el hierro fijo en ambos extremos no puede
+absorber el movimiento por expansión térmica del hormigón, que es justamente su
+función — puede generar fisuración no controlada en el punto donde se esperaba que
+la junta la evitara.
+Recomendación: Verificar con el proyectista si el detalle está mal dibujado o si
+corresponde a otro criterio de diseño no explicado en la lámina.
 ```
 
 ### Preguntas que debería hacerse un revisor técnico senior
