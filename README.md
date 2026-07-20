@@ -162,14 +162,38 @@ Recomendación: Considerar un título más específico, por ejemplo:
 
 ## Instalación
 
+No hace falta saber usar Git — cualquiera de las dos opciones deja la Skill lista.
+
+### Opción A — sin Git (la más simple)
+
+1. En la página de este repo en GitHub, click en el botón verde **Code** → **Download ZIP**.
+2. Descomprimir el ZIP descargado.
+3. Copiar la carpeta resultante (renombrada `technical-drawing-reviewer` si no lo
+   está) a la carpeta de Skills de Claude Code:
+   - **Windows**: `C:\Users\<tu-usuario>\.claude\skills\technical-drawing-reviewer\`
+   - **Mac/Linux**: `~/.claude/skills/technical-drawing-reviewer/`
+
+### Opción B — con Git
+
 ```bash
-git clone https://github.com/<tu-usuario>/technical-drawing-reviewer.git
+git clone https://github.com/<usuario>/technical-drawing-reviewer.git
 cp -r technical-drawing-reviewer ~/.claude/skills/
 ```
 
-Reiniciá o abrí una sesión nueva de Claude Code para que detecte la Skill. Una vez
-instalada, se activa sola cuando le pedís que revise, audite o "dé el OK" a un plano
-en PDF — no hace falta invocarla por nombre.
+### Después de cualquiera de las dos
+
+Instalar la dependencia del chequeo de legibilidad (ver sección "Dependencias" más
+arriba):
+```bash
+cd ~/.claude/skills/technical-drawing-reviewer
+pip install -r scripts/requirements.txt
+```
+
+Abrí una terminal y escribí `claude` para iniciar Claude Code — no importa desde qué
+carpeta. Una vez instalada, la Skill se activa sola cuando le pedís que revise,
+audite o "dé el OK" a un plano en PDF — no hace falta invocarla por nombre, aunque
+también podés pedirle explícitamente "usá la skill technical-drawing-reviewer para
+revisar [ruta del PDF]" si querés forzarlo.
 
 ## Licencia
 
