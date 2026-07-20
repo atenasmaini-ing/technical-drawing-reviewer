@@ -87,7 +87,13 @@ technical-drawing-reviewer/
     ├── checklist-constructability.md     # ¿Se puede ejecutar con lo documentado?
     ├── report-template.md                # Estructura fija del informe final
     └── disciplines/
-        └── civil-infrastructure.md       # Criterios por tipo de lámina (civil/infra)
+        ├── civil-infrastructure.md       # Índice: qué módulo corresponde a cada tipo de lámina
+        └── civil-infrastructure/
+            ├── pavimento-cordon-cuneta.md
+            ├── desagues-pluviales.md
+            ├── planos-generales.md
+            ├── sumideros-camaras-bocas-tormenta.md
+            └── perfiles.md
 ```
 
 ## Dependencias

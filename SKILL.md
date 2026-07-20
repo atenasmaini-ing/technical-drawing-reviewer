@@ -73,10 +73,15 @@ parte de la hoja. No hace falta un módulo específico de "lámina combinada" �
 combinación es una cuestión de layout, no de contenido nuevo.
 
 Consultá `references/disciplines/civil-infrastructure.md` — por ahora la única
-disciplina cubierta. Si te encontrás con una lámina que claramente pertenece a otra
-disciplina (estructura, arquitectura, instalaciones, etc.), decilo explícitamente en
-el informe en vez de forzar los criterios de obra civil sobre algo que no aplica: esa
-disciplina todavía no está cargada en la Skill.
+disciplina cubierta. Es un **índice**: te dice qué módulo corresponde a cada tipo de
+lámina y en qué archivo está, dentro de `references/disciplines/civil-infrastructure/`.
+Abrí solo el archivo del módulo que corresponda, no todos — cada uno tiene
+profundidad real y cargarlos todos de una vez desperdicia contexto sin necesidad.
+
+Si te encontrás con una lámina que claramente pertenece a otra disciplina
+(estructura, arquitectura, instalaciones, etc.), decilo explícitamente en el informe
+en vez de forzar los criterios de obra civil sobre algo que no aplica: esa disciplina
+todavía no está cargada en la Skill.
 
 ### 3. Revisar cada dimensión
 
@@ -112,14 +117,18 @@ comparable entre revisiones.
 Esta Skill hoy solo tiene criterios cargados para obra civil e infraestructura. Está
 organizada así a propósito para poder sumar disciplinas nuevas sin reescribir nada:
 
-- Una disciplina nueva = un archivo nuevo en `references/disciplines/`.
+- Una disciplina nueva = un archivo índice nuevo en `references/disciplines/`
+  (siguiendo el patrón de `civil-infrastructure.md`) más una carpeta con un archivo
+  por tipo de lámina — no un solo archivo gigante. Es la misma reorganización que
+  se le aplicó a obra civil e infraestructura cuando ese archivo único pasó de 1
+  módulo a 5 y se volvió difícil de manejar.
 - Los checklists transversales (presentación, legibilidad, consistencia, calidad
   técnica, constructibilidad) no cambian al agregar disciplinas.
 - No existen estándares internos formalizados todavía: los criterios de
-  `checklist-technical-quality.md` y de `disciplines/civil-infrastructure.md` están
-  basados en buenas prácticas generales de ingeniería civil y se van a ir afinando
-  con el uso real. Si en algún momento aparece un manual de estándares propio, se
-  incorpora como referencia adicional sin tocar la estructura existente.
+  `checklist-technical-quality.md` y de cada módulo en `disciplines/civil-infrastructure/`
+  están basados en buenas prácticas generales de ingeniería civil y se van a ir
+  afinando con el uso real. Si en algún momento aparece un manual de estándares
+  propio, se incorpora como referencia adicional sin tocar la estructura existente.
 - `scripts/check_legibility.py` es la única excepción a "sin scripts propios", y a
   propósito: mide algo (tamaño real de texto y línea) que no se puede verificar de
   forma objetiva solo mirando el PDF. Si aparece otra limitación concreta similar,
