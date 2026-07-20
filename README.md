@@ -48,13 +48,18 @@ planta-corte-detalle") resueltos como principios transversales cortos en vez de
 módulos completos, porque no tenían contenido de dominio propio que no estuviera
 ya cubierto — evitamos construir un módulo solo para tener uno.
 
+`references/report-template.md` ya está — define la estructura fija del informe
+final (encabezado, ficha de láminas, resumen ejecutivo, hallazgos por lámina,
+consistencia de proyecto, y la conclusión Apto/Requiere revisión/No apto derivada
+de contar hallazgos Bloqueante). Formalizada a partir de los informes reales que ya
+se armaron durante el desarrollo, no inventada de cero.
+
 **Planeado antes de v1.0.0:**
 - Validar "perfiles longitudinales" (dentro del módulo de perfiles) contra un
   plano real — hoy se basa solo en conocimiento general, sin el mismo contraste
   que el resto del contenido.
 - `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
   gráfica).
-- `references/report-template.md` (estructura del informe final).
 - Suite de evals (`evals/evals.json`) con casos de prueba.
 
 Si probás la Skill ahora, tené en cuenta que solo "pavimento y cordón cuneta",
@@ -80,6 +85,7 @@ technical-drawing-reviewer/
     ├── checklist-consistency.md          # Contradicciones internas y entre láminas
     ├── checklist-technical-quality.md    # Unidades, precisión, notación, acotado
     ├── checklist-constructability.md     # ¿Se puede ejecutar con lo documentado?
+    ├── report-template.md                # Estructura fija del informe final
     └── disciplines/
         └── civil-infrastructure.md       # Criterios por tipo de lámina (civil/infra)
 ```
