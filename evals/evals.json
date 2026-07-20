@@ -1,0 +1,64 @@
+{
+  "skill_name": "technical-drawing-reviewer",
+  "note": "Los PDFs reales usados para armar estos casos no están incluidos en este repo (son proyectos de terceros: Comuna de Fighiera, un municipio de Villa Constitución, DNV). Cada eval describe qué PDF usar y qué debería encontrar una revisión correcta. Para correrlos, pedile a la Skill que revise el PDF correspondiente y comparalo contra 'expected_output' y 'assertions'.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "relleno-sanitario-set-completo",
+      "prompt": "Revisá este set de 3 planos antes de emitirlos para obra: Proyecto Vial, Hídrico y Detalle de sumideros (proyecto de relleno sanitario, Villa Constitución).",
+      "files": [
+        "1- Proyecto Vial.pdf",
+        "2- Proyecto Hidrico - Cotas CC.pdf",
+        "3- Detalle de sumideros.pdf"
+      ],
+      "expected_output": "Informe HTML con al menos 2 hallazgos Bloqueante: Sí (contradicción de material ripio/hormigón entre láminas, y numeración duplicada de sumidero '1/3'), veredicto final 'Requiere revisión antes de emitir', y explícito sobre que ninguna lámina matchea limpio con el módulo de pavimento.",
+      "assertions": [
+        "Detecta como Bloqueante: Sí la contradicción entre la leyenda ('Superficie a colocar Ripio') y el detalle 'BASE SUPERFICIAL (Bs)' que especifica Hormigón H21",
+        "Detecta como Bloqueante: Sí que las dos variantes de sumidero en la Lámina 3 están rotuladas de forma idéntica ('Sumideros 1/3')",
+        "NO marca como Omisión el campo 'ESC.' vacío del rótulo, dado que cada vista tiene su propia escala rotulada (regla de checklist-presentation.md)",
+        "El veredicto final del set es 'Requiere revisión antes de emitir', no 'Apto' ni 'No apto'",
+        "El informe se entrega como archivo HTML (no como texto en el chat), guardado en el mismo directorio que los PDFs, con nombre 'Informe de Revisión - <proyecto>.html'",
+        "En el HTML, los hallazgos con Bloqueante: Sí aparecen con la card expandida (clase bloqueante-si + estado open) sin necesidad de hacer click"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "proyecto-vial-aislado-identificacion-de-tipo",
+      "prompt": "¿Qué tipo de plano es este, y está listo para emitir? (adjuntar solo 'Proyecto Vial.pdf', sin el resto del set)",
+      "files": ["1- Proyecto Vial.pdf"],
+      "expected_output": "La Skill identifica que esta lámina NO coincide limpio con el módulo 'pavimento y cordón cuneta' (no tiene sección tipo ni estructura de pavimento) y la trata como planta general / trazado vial. Propone alternativas de título concretas para el título genérico 'PROYECTO VIAL'.",
+      "assertions": [
+        "Declara explícitamente que el tipo de lámina no matchea con 'pavimento y cordón cuneta'",
+        "Propone 2 o 3 alternativas de título concretas y basadas en el contenido real de la lámina, no una sugerencia genérica tipo 'mejorar el título'",
+        "No inventa información que no esté en el plano (ej. no asume una escala si el campo está vacío y no hay escala gráfica)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "cordon-cuneta-fighiera-juntas",
+      "prompt": "Revisá estos detalles de cordón cuneta antes de que los usemos en obra (Comuna de Fighiera, cordón simple y cordón cuneta con pendiente).",
+      "files": [
+        "2- Detalle de cordón cuneta simple.pdf",
+        "3- Detalle de cordón cunetaTI.pdf"
+      ],
+      "expected_output": "Revisión que reconoce la distinción estructural entre junta de contracción (extremo empotrado) y junta de dilatación (extremo envainado y engrasado), sin marcar como omisión el campo 'Escalas:' del rótulo dado que cada vista tiene su propia escala.",
+      "assertions": [
+        "Si ambas juntas del detalle muestran el mismo tipo de extremo (ambas empotradas o ambas envainadas), lo marca como Error — de lo contrario, no fuerza un hallazgo donde no lo hay",
+        "Reconoce 'cordón simple' y el detalle con pendiente como variantes distintas, no como el mismo elemento",
+        "NO marca como Omisión el campo 'Escalas:' vacío del rótulo"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "disciplina-no-cubierta",
+      "prompt": "Revisá este plano antes de emitirlo (un plano de estructura, arquitectura, o instalaciones — cualquiera fuera de obra civil e infraestructura).",
+      "files": [],
+      "expected_output": "La Skill aplica los 5 checklists transversales y el marco de review-framework.md, pero declara explícitamente en el informe que esa disciplina/tipo de lámina todavía no tiene un módulo de criterios específicos cargado, para que el usuario sepa que la revisión fue más general de lo que podría ser.",
+      "assertions": [
+        "El informe incluye una nota de alcance explícita sobre la falta de módulo específico para esa disciplina",
+        "No fuerza criterios de obra civil (ej. pendientes de calzada, cordón cuneta) sobre contenido que no corresponde",
+        "Sigue generando hallazgos de los 5 checklists transversales igual (presentación, legibilidad, consistencia, calidad técnica, constructibilidad)"
+      ]
+    }
+  ]
+}

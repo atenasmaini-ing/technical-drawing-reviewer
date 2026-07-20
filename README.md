@@ -57,11 +57,13 @@ sección (encabezado, ficha de láminas, resumen ejecutivo, hallazgos por lámin
 consistencia de proyecto, conclusión Apto/Requiere revisión/No apto). Formalizado a
 partir de informes reales ya generados durante el desarrollo, no inventado de cero.
 
+`evals/evals.json` ya tiene 4 casos de prueba reales (regresión manual, no
+automatizada) — ver `evals/README.md` para cómo correrlos.
+
 **Planeado antes de v1.0.0:**
 - Validar "perfiles longitudinales" (dentro del módulo de perfiles) contra un
   plano real — hoy se basa solo en conocimiento general, sin el mismo contraste
   que el resto del contenido.
-- Suite de evals (`evals/evals.json`) con casos de prueba.
 
 (`improvement-guidelines.md` fue evaluado y descartado — los checklists ya generan
 hallazgos Tipo Mejora sin necesitar un archivo aparte.)
@@ -84,6 +86,9 @@ technical-drawing-reviewer/
 │   └── requirements.txt
 ├── assets/
 │   └── report-template.html              # Esqueleto HTML exacto del informe final
+├── evals/
+│   ├── evals.json                        # Casos de prueba (regresión manual)
+│   └── README.md
 └── references/
     ├── review-framework.md               # Vocabulario y estructura de hallazgos
     ├── checklist-presentation.md         # Rótulo, título, simbología, orientación
