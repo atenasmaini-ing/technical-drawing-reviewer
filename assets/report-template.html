@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Revisión Técnica — {{NOMBRE_PROYECTO}}</title>
+<style>
+  /*
+    Plantilla de salida del informe final (paso 5 de SKILL.md).
+    No modifiques esta hoja de estilos al generar un informe — copiá el
+    archivo completo y reemplazá solo el contenido marcado con {{...}} o
+    con comentarios "REPETIR / COMPLETAR". La consistencia visual entre
+    informes es parte de lo que los hace comparables.
+  */
+  :root {
+    --critica: #b91c1c;
+    --critica-bg: #fef2f2;
+    --critica-border: #fca5a5;
+    --alta: #c2410c;
+    --alta-bg: #fff7ed;
+    --alta-border: #fdba74;
+    --media: #b45309;
+    --media-bg: #fffbeb;
+    --media-border: #fcd34d;
+    --baja: #4d7c0f;
+    --baja-bg: #f7fee7;
+    --baja-border: #a3e635;
+    --na: #1d4ed8;
+    --na-bg: #eff6ff;
+    --na-border: #93c5fd;
+    --bloqueante: #991b1b;
+    --no-bloqueante: #166534;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --header-bg: #0f172a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--header-bg);
+    color: white;
+    padding: 2rem 2.5rem 1.5rem;
+  }
+  header .proyecto-label {
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: .4rem;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: .3rem;
+  }
+  header .sub {
+    font-size: 13px;
+    color: #cbd5e1;
+  }
+  header .meta {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  header .meta-item {
+    font-size: 12px;
+    color: #94a3b8;
+  }
+  header .meta-item strong {
+    display: block;
+    color: #e2e8f0;
+    font-size: 13px;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* RESUMEN EJECUTIVO */
+  .resumen-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 5px solid #b91c1c;
+  }
+  .resumen-card h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: .8rem;
+  }
+  .resumen-card p {
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+  }
+  .stat-card .stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: .2rem;
+  }
+  .stat-card .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+  }
+  .stat-card.bloqueante .stat-number { color: var(--critica); }
+  .stat-card.alta .stat-number { color: var(--alta); }
+  .stat-card.total .stat-number { color: #0f172a; }
+  .stat-card.ok .stat-number { color: var(--na); }
+
+  /* FICHA TABLE */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: .8rem;
+    padding-bottom: .4rem;
+    border-bottom: 2px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+  thead tr { background: #f1f5f9; }
+  th {
+    padding: .6rem .9rem;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: .65rem .9rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8fafc; }
+
+  /* LAMINA SECTION */
+  .lamina-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .lamina-header {
+    background: #0f172a;
+    color: white;
+    padding: .8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+  }
+  .lamina-header .hoja-badge {
+    background: #334155;
+    color: #e2e8f0;
+    font-size: 11px;
+    font-weight: 700;
+    padding: .2rem .6rem;
+    border-radius: 4px;
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .lamina-header .lamina-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .03em;
+  }
+  .lamina-header .lamina-tipo {
+    margin-left: auto;
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: right;
+    max-width: 280px;
+  }
+  .lamina-body { padding: 1.2rem; }
+
+  /* HALLAZGO CARD */
+  .hallazgo-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: .9rem;
+    overflow: hidden;
+  }
+  .hallazgo-card.bloqueante-si {
+    border-color: var(--critica-border);
+    border-left: 4px solid var(--critica);
+  }
+  /* Prioridad Crítica SIN Bloqueante: Sí — caso válido (ver review-framework.md,
+     ej. un riesgo de seguridad grave que no impide interpretar/ejecutar el plano).
+     No estaba contemplado en el diseño original: sin esta regla, una tarjeta
+     Crítica no-bloqueante caía sin estilo de card (aunque el badge sí lo tuviera). */
+  .hallazgo-card.prioridad-critica {
+    border-color: var(--critica-border);
+    border-left: 4px solid var(--critica);
+  }
+  .hallazgo-card.prioridad-critica .hallazgo-header { background: var(--critica-bg); }
+  .hallazgo-card.prioridad-alta {
+    border-left: 4px solid var(--alta);
+  }
+  .hallazgo-card.prioridad-media {
+    border-left: 4px solid var(--media);
+  }
+  .hallazgo-card.prioridad-baja {
+    border-left: 4px solid var(--baja);
+  }
+  .hallazgo-card.prioridad-na {
+    border-left: 4px solid var(--na);
+  }
+
+  .hallazgo-header {
+    padding: .6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  .hallazgo-card.bloqueante-si .hallazgo-header { background: var(--critica-bg); }
+  .hallazgo-card.prioridad-alta .hallazgo-header { background: var(--alta-bg); }
+  .hallazgo-card.prioridad-media .hallazgo-header { background: var(--media-bg); }
+  .hallazgo-card.prioridad-baja .hallazgo-header { background: var(--baja-bg); }
+  .hallazgo-card.prioridad-na .hallazgo-header { background: var(--na-bg); }
+
+  .hallazgo-id {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    min-width: 48px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: .18rem .55rem;
+    border-radius: 999px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .badge-tipo-error { background: #fee2e2; color: #991b1b; }
+  .badge-tipo-omision { background: #fde8d8; color: #9a3412; }
+  .badge-tipo-riesgo { background: #fef9c3; color: #854d0e; }
+  .badge-tipo-observacion { background: #e0f2fe; color: #075985; }
+  .badge-tipo-mejora { background: #f3e8ff; color: #7e22ce; }
+  .badge-tipo-buena { background: #dcfce7; color: #166534; }
+
+  .badge-bloq-si { background: #fee2e2; color: #991b1b; }
+  .badge-bloq-no { background: #dcfce7; color: #166534; }
+
+  .badge-prio-critica { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+  .badge-prio-alta { background: #fff7ed; color: #c2410c; border: 1px solid #fdba74; }
+  .badge-prio-media { background: #fffbeb; color: #b45309; border: 1px solid #fcd34d; }
+  .badge-prio-baja { background: #f7fee7; color: #4d7c0f; border: 1px solid #a3e635; }
+  .badge-prio-na { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+
+  .hallazgo-titulo {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+  .chevron {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform .2s;
+  }
+  .hallazgo-header.open .chevron { transform: rotate(180deg); }
+
+  .hallazgo-body {
+    display: none;
+    padding: .9rem 1rem 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .hallazgo-body.open { display: block; }
+
+  .campo-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: .3rem .8rem;
+    margin-bottom: .5rem;
+    align-items: start;
+  }
+  .campo-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    padding-top: .1rem;
+  }
+  .campo-value {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  /* CONSISTENCIA */
+  .consistencia-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  /* CONCLUSION TABLE */
+  .conclusion-table td.veredicto-req {
+    font-weight: 700;
+    color: #c2410c;
+  }
+  .conclusion-table td.veredicto-apto {
+    font-weight: 700;
+    color: #166534;
+  }
+  .conclusion-table td.veredicto-noapto {
+    font-weight: 700;
+    color: #991b1b;
+  }
+  .conclusion-final {
+    background: #fff7ed;
+    border: 2px solid #fdba74;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .conclusion-final .icon { font-size: 2rem; line-height: 1; }
+  .conclusion-final h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #92400e;
+    margin-bottom: .3rem;
+  }
+  .conclusion-final p {
+    font-size: 13px;
+    color: #78350f;
+    line-height: 1.6;
+  }
+
+  /* ALCANCE */
+  .alcance-box {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+    font-size: 13px;
+    color: #0c4a6e;
+    line-height: 1.6;
+  }
+  .alcance-box strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #0369a1; margin-bottom: .4rem; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .container { padding: 1rem; }
+    .lamina-header .lamina-tipo { display: none; }
+    .campo-row { grid-template-columns: 1fr; }
+    .campo-label { margin-bottom: -.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="proyecto-label">Informe de Revisión Técnica · Control de Calidad</div>
+  <h1>{{NOMBRE_PROYECTO}}</h1>
+  <div class="sub">{{SUBTITULO — ej. organismo, obra/tema}}</div>
+  <div class="meta">
+    <div class="meta-item"><strong>Fecha de revisión</strong>{{FECHA_DE_HOY}}</div>
+    <div class="meta-item"><strong>Láminas revisadas</strong>{{ALCANCE — ej. "Hojas 01 a 03 (set completo)"}}</div>
+    <div class="meta-item"><strong>Revisado con</strong>Skill technical-drawing-reviewer</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- STATS: contá los hallazgos reales, no inventes números de ejemplo -->
+  <div class="stats-row">
+    <div class="stat-card bloqueante">
+      <div class="stat-number">{{N}}</div>
+      <div class="stat-label">Hallazgos bloqueantes</div>
+    </div>
+    <div class="stat-card alta">
+      <div class="stat-number">{{N}}</div>
+      <div class="stat-label">Prioridad alta</div>
+    </div>
+    <div class="stat-card total">
+      <div class="stat-number">{{N}}</div>
+      <div class="stat-label">Hallazgos totales</div>
+    </div>
+    <div class="stat-card ok">
+      <div class="stat-number">{{N}}</div>
+      <div class="stat-label">Buenas prácticas</div>
+    </div>
+  </div>
+
+  <!-- RESUMEN EJECUTIVO: 3-5 líneas, ver report-template.md sección 4 -->
+  <div class="resumen-card">
+    <h2>Resumen ejecutivo</h2>
+    <p>{{RESUMEN_EJECUTIVO}}</p>
+  </div>
+
+  <!--
+    ALCANCE Y ADVERTENCIAS — solo si aplica (ver report-template.md sección 2).
+    Omitir todo este bloque .alcance-box si no hay nada que advertir.
+  -->
+  <div class="alcance-box">
+    <strong>Alcance y advertencias</strong>
+    {{ADVERTENCIAS_DE_ALCANCE}}
+  </div>
+
+  <!-- FICHA DE LÁMINAS -->
+  <div class="section">
+    <div class="section-title">Ficha de láminas revisadas</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Hoja</th>
+          <th>Título (rótulo)</th>
+          <th>Fecha</th>
+          <th>Tipo identificado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- REPETIR una <tr> por cada lámina del set -->
+        <tr>
+          <td><strong>{{N°}}</strong></td>
+          <td>{{TÍTULO DEL RÓTULO}}</td>
+          <td>{{FECHA}}</td>
+          <td>{{TIPO IDENTIFICADO — si no coincide con ningún módulo, decirlo acá}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- HALLAZGOS POR LÁMINA -->
+  <div class="section">
+    <div class="section-title">Hallazgos por lámina</div>
+
+    <!-- REPETIR un .lamina-block por cada lámina -->
+    <div class="lamina-block">
+      <div class="lamina-header">
+        <span class="hoja-badge">HOJA {{N°}}</span>
+        <span class="lamina-title">{{TÍTULO}}</span>
+        <span class="lamina-tipo">{{TIPO IDENTIFICADO, corto}}</span>
+      </div>
+      <div class="lamina-body">
+
+        <!--
+          Si esta lámina no tiene módulo de disciplina cargado, agregar acá un
+          div.alcance-box (versión inline, ver ejemplo de estilo en el informe
+          de referencia) aclarando que se revisó con criterio general.
+        -->
+
+        <!--
+          REPETIR un .hallazgo-card por cada hallazgo de esta lámina, en este
+          orden: primero los Bloqueante: Sí, después el resto por Prioridad
+          descendente (Crítica > Alta > Media > Baja > N/A) — ver
+          report-template.md sección 5.
+
+          Clase del card:
+            - Bloqueante: Sí          → class="hallazgo-card bloqueante-si"
+            - Bloqueante: No, Crítica → class="hallazgo-card prioridad-critica"
+            - Bloqueante: No, Alta    → class="hallazgo-card prioridad-alta"
+            - Bloqueante: No, Media   → class="hallazgo-card prioridad-media"
+            - Bloqueante: No, Baja    → class="hallazgo-card prioridad-baja"
+            - Bloqueante: No, N/A     → class="hallazgo-card prioridad-na"
+
+          Badge de Tipo (elegir uno):
+            badge-tipo-error | badge-tipo-omision | badge-tipo-riesgo |
+            badge-tipo-observacion (Observación preventiva) | badge-tipo-mejora |
+            badge-tipo-buena (Buena práctica)
+
+          Badge de Prioridad: badge-prio-critica | -alta | -media | -baja | -na
+          Badge de Bloqueante: badge-bloq-si | badge-bloq-no
+
+          Si es bloqueante, usar el texto "⚠ Crítica" y "⛔ BLOQUEANTE" en los
+          badges (ver ejemplo abajo) para que se distinga incluso sin color.
+
+          Campos dentro de hallazgo-body: un .campo-row por cada campo de
+          review-framework.md que corresponda mostrar (Confianza es opcional
+          mostrarla explícita si Alta y obvia por contexto; Evidencia, Impacto
+          y Recomendación siempre van). No inventes campos nuevos.
+        -->
+        <div class="hallazgo-card prioridad-alta">
+          <div class="hallazgo-header" onclick="toggle(this)">
+            <span class="hallazgo-id">{{ID — ej. 01-A}}</span>
+            <span class="badge badge-tipo-omision">{{Tipo}}</span>
+            <span class="badge badge-prio-alta">{{Prioridad}}</span>
+            <span class="badge badge-bloq-no">No bloqueante</span>
+            <span class="hallazgo-titulo">{{Título corto y específico del hallazgo}}</span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="hallazgo-body">
+            <div class="campo-row"><span class="campo-label">Evidencia</span><span class="campo-value">{{...}}</span></div>
+            <div class="campo-row"><span class="campo-label">Impacto</span><span class="campo-value">{{...}}</span></div>
+            <div class="campo-row"><span class="campo-label">Recomendación</span><span class="campo-value">{{...}}</span></div>
+          </div>
+        </div>
+
+      </div><!-- /lamina-body -->
+    </div><!-- /lamina-block -->
+
+  </div><!-- /section hallazgos por lámina -->
+
+  <!--
+    CONSISTENCIA Y VERIFICACIONES CRUZADAS A NIVEL DE PROYECTO
+    Hallazgos que involucran más de una lámina — mismo formato de card que
+    arriba, no repetir un hallazgo transversal dentro de cada lámina individual.
+    Omitir toda la sección si no hay hallazgos de este tipo (decilo igual, no
+    ocultes la sección — ver report-template.md sección 6).
+  -->
+  <div class="section">
+    <div class="section-title">Consistencia y verificaciones cruzadas a nivel de proyecto</div>
+
+    <!-- mismo patrón de .hallazgo-card que arriba, IDs sugeridos tipo "6.1", "6.2" -->
+
+  </div>
+
+  <!-- CONCLUSIÓN -->
+  <div class="section">
+    <div class="section-title">Conclusión</div>
+
+    <table class="conclusion-table">
+      <thead>
+        <tr>
+          <th>Lámina</th>
+          <th>Bloqueantes propios</th>
+          <th>Bloqueantes de consistencia</th>
+          <th>Veredicto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- REPETIR una fila por lámina. Clase del <td> de veredicto:
+             veredicto-apto | veredicto-req | veredicto-noapto -->
+        <tr>
+          <td><strong>{{N°}}</strong> — {{TÍTULO}}</td>
+          <td style="text-align:center;">{{n}}</td>
+          <td style="text-align:center;">{{n}}</td>
+          <td class="veredicto-req">{{Veredicto}}</td>
+        </tr>
+        <tr style="background:#f1f5f9;font-weight:700;">
+          <td>Set completo</td>
+          <td style="text-align:center;" colspan="2">{{resumen de bloqueantes}}</td>
+          <td class="veredicto-req">{{Veredicto final del set}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!--
+      Icono según veredicto final: ✅ Apto para emitir · ⚠️ Requiere revisión ·
+      ⛔ No apto. Ver report-template.md sección 7 para la definición de cada uno.
+    -->
+    <div class="conclusion-final">
+      <div class="icon">{{✅ | ⚠️ | ⛔}}</div>
+      <div>
+        <h3>{{Veredicto final del set}}</h3>
+        <p>{{Explicación: qué hallazgos bloqueantes hay (con su ID, para que se
+        puedan ubicar arriba) y qué hace falta resolver antes de emitir. Si no
+        hay bloqueantes, decirlo explícitamente igual.}}</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  Generado el {{FECHA_DE_HOY}} · Revisión técnica con Claude Code / Skill technical-drawing-reviewer
+</footer>
+
+<script>
+  function toggle(header) {
+    header.classList.toggle('open');
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+  }
+  // Los hallazgos bloqueantes se abren expandidos por defecto; el resto queda
+  // colapsado. No cambiar este comportamiento.
+  document.querySelectorAll('.hallazgo-card.bloqueante-si .hallazgo-header').forEach(h => {
+    h.classList.add('open');
+    h.nextElementSibling.classList.add('open');
+  });
+</script>
+</body>
+</html>

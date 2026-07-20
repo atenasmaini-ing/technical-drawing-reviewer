@@ -108,9 +108,17 @@ puede no tener errores y aun así ser mejorable.
 
 ### 5. Armar el informe
 
-Compilá todo con la estructura exacta de `references/report-template.md`. No
-reordenes ni omitas secciones de esa plantilla — es lo que hace que el informe sea
-comparable entre revisiones.
+El informe final es un **archivo HTML**, no texto en el chat. Seguí
+`references/report-template.md` para qué va en cada sección, y copiá
+`assets/report-template.html` como base literal (mantené su `<style>` y su
+`<script>` sin cambios — solo completás contenido). Guardalo en el mismo directorio
+que los PDFs revisados, con el nombre `Informe de Revisión - <nombre del
+proyecto>.html`. No reordenes ni omitas secciones de la plantilla — es lo que hace
+que el informe sea comparable entre revisiones.
+
+En el chat, después de guardar el archivo, **no repitas el informe completo** — decí
+la ruta del archivo, el veredicto final, y un resumen de una línea de los hallazgos
+bloqueantes. El detalle completo lo lee el usuario en el HTML.
 
 ## Alcance actual y crecimiento
 

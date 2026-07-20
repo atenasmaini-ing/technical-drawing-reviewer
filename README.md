@@ -48,19 +48,23 @@ planta-corte-detalle") resueltos como principios transversales cortos en vez de
 módulos completos, porque no tenían contenido de dominio propio que no estuviera
 ya cubierto — evitamos construir un módulo solo para tener uno.
 
-`references/report-template.md` ya está — define la estructura fija del informe
-final (encabezado, ficha de láminas, resumen ejecutivo, hallazgos por lámina,
-consistencia de proyecto, y la conclusión Apto/Requiere revisión/No apto derivada
-de contar hallazgos Bloqueante). Formalizada a partir de los informes reales que ya
-se armaron durante el desarrollo, no inventada de cero.
+El informe final se entrega como **un archivo HTML formateado** (`assets/report-template.html`
+define el estilo exacto: stats row, tarjetas de hallazgo expandibles con colores por
+prioridad, badges de tipo/prioridad/bloqueante, tabla de conclusión), guardado en el
+mismo directorio que los PDFs revisados. Los hallazgos bloqueantes se abren
+expandidos por defecto. `references/report-template.md` define qué va en cada
+sección (encabezado, ficha de láminas, resumen ejecutivo, hallazgos por lámina,
+consistencia de proyecto, conclusión Apto/Requiere revisión/No apto). Formalizado a
+partir de informes reales ya generados durante el desarrollo, no inventado de cero.
 
 **Planeado antes de v1.0.0:**
 - Validar "perfiles longitudinales" (dentro del módulo de perfiles) contra un
   plano real — hoy se basa solo en conocimiento general, sin el mismo contraste
   que el resto del contenido.
-- `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
-  gráfica).
 - Suite de evals (`evals/evals.json`) con casos de prueba.
+
+(`improvement-guidelines.md` fue evaluado y descartado — los checklists ya generan
+hallazgos Tipo Mejora sin necesitar un archivo aparte.)
 
 Si probás la Skill ahora, tené en cuenta que solo "pavimento y cordón cuneta",
 "desagües pluviales", "planos generales de obra civil e infraestructura",
@@ -78,6 +82,8 @@ technical-drawing-reviewer/
 ├── scripts/
 │   ├── check_legibility.py               # Mide tamaño de texto y grosor de línea reales
 │   └── requirements.txt
+├── assets/
+│   └── report-template.html              # Esqueleto HTML exacto del informe final
 └── references/
     ├── review-framework.md               # Vocabulario y estructura de hallazgos
     ├── checklist-presentation.md         # Rótulo, título, simbología, orientación
@@ -106,6 +112,10 @@ technical-drawing-reviewer/
   ```
 
 ## Ejemplo de revisión
+
+El informe final se entrega como HTML (ver `assets/report-template.html`), no como
+texto — lo de acá abajo es el contenido de los hallazgos en formato de 7 campos,
+para que se lea sin tener que abrir un archivo.
 
 Extracto real de una revisión de un set de planos de un proyecto de relleno
 sanitario (obra vial + hidráulica + detalle de sumideros). La Skill detectó una
