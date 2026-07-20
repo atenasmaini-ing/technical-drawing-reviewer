@@ -25,13 +25,15 @@ va a difundir como v1.0.0.
 - Marco de revisión completo: todo hallazgo usa 7 campos fijos (Tipo, Prioridad,
   Bloqueante, Confianza, Evidencia, Impacto, Recomendación), con criterios objetivos
   para determinar si un hallazgo bloquea la emisión del plano.
-- Cuatro módulos de revisión completos y probados en profundidad (obra civil e
-  infraestructura): **planos de pavimento y cordón cuneta**, **planos de
-  desagües pluviales** (conductos circulares/rectangulares, zanjas a cielo abierto,
-  reservorios de regulación, estructuras de orificio/vertedero), **planos
-  generales de obra civil e infraestructura** (trazado general, sectorización,
-  marco geométrico de referencia para el resto del set) y **sumideros, cámaras y
-  bocas de tormenta** (detalle constructivo de estructuras puntuales).
+- Cinco módulos de revisión en obra civil e infraestructura: **planos de pavimento
+  y cordón cuneta**, **planos de desagües pluviales** (conductos
+  circulares/rectangulares, zanjas a cielo abierto, reservorios de regulación,
+  estructuras de orificio/vertedero), **planos generales de obra civil e
+  infraestructura** (trazado general, sectorización, marco geométrico de
+  referencia), **sumideros, cámaras y bocas de tormenta** (detalle constructivo de
+  estructuras puntuales) y **perfiles longitudinales y transversales** (esta
+  última con la parte de perfiles transversales validada contra un plano real, y
+  la de longitudinales todavía sin validar).
 - **Los 5 checklists transversales completos**: presentación (incluye propuesta de
   títulos alternativos cuando el título de la lámina es genérico), legibilidad,
   consistencia (contradicciones internas y entre láminas del mismo set), calidad
@@ -41,17 +43,20 @@ va a difundir como v1.0.0.
   arquitectura, instalaciones) sin reescribir nada existente.
 
 **Planeado antes de v1.0.0:**
-- Módulos restantes de obra civil: perfiles longitudinales y transversales,
-  detalles constructivos, láminas combinadas.
+- Módulos restantes de obra civil: detalles constructivos, láminas combinadas.
+- Validar "perfiles longitudinales" (dentro del módulo de perfiles) contra un
+  plano real — hoy se basa solo en conocimiento general, sin el mismo contraste
+  que el resto del contenido.
 - `references/improvement-guidelines.md` (sugerencias de mejora de comunicación
   gráfica).
 - `references/report-template.md` (estructura del informe final).
 - Suite de evals (`evals/evals.json`) con casos de prueba.
 
 Si probás la Skill ahora, tené en cuenta que solo "pavimento y cordón cuneta",
-"desagües pluviales", "planos generales de obra civil e infraestructura" y
-"sumideros, cámaras y bocas de tormenta" tienen criterios específicos cargados —
-cualquier otro tipo de plano va a recibir una revisión más genérica hasta que se
+"desagües pluviales", "planos generales de obra civil e infraestructura",
+"sumideros, cámaras y bocas de tormenta" y "perfiles longitudinales y
+transversales" tienen criterios específicos cargados — cualquier otro tipo de
+plano va a recibir una revisión más genérica hasta que se
 sume su módulo.
 
 ## Estructura
