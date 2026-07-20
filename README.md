@@ -1,5 +1,21 @@
 # Technical Drawing Reviewer
 
+**English summary:** A [Claude Code](https://claude.com/claude-code) Skill that acts
+as a senior QA reviewer for engineering/architecture drawings exported to PDF. It
+identifies the drawing type, checks presentation, legibility, consistency, technical
+quality and constructability, and returns a prioritized findings report with a
+confidence level per finding — always distinguishing observable facts from
+inferences. **The Skill itself, its documentation, and its domain criteria are
+written in Spanish**, built around Argentine civil-engineering terminology and
+real drawings (pavement/curb detail, storm drainage, catch basins, general site
+plans, typical cross-sections). It runs the same way as any Claude Code Skill —
+see [Instalación](#instalación) below for setup steps (same in any language). Full
+translation isn't planned right now since the domain value is inherently
+Spanish-language-scoped; get in touch if broader English support would be useful to
+you.
+
+---
+
 > This project is intended as a documentation quality assurance assistant.
 > It does not replace engineering judgment, professional review, or code
 > compliance verification.
