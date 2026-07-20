@@ -18,15 +18,25 @@ documentación — es la lista de "cuando veo esto, freno y miro con más cuidad
 "Sumideros, cámaras y bocas de tormenta" y "Perfiles longitudinales y
 transversales" (esta última con la mitad — perfiles transversales — validada
 contra un plano real, y la mitad de perfiles longitudinales todavía sin validar,
-ver nota dentro del módulo).** Si te toca revisar alguno de estos otros tipos,
-todavía no desarrollados acá, aplicá igual los cinco checklists transversales
-(`references/checklist-*.md`) y el marco de `review-framework.md`, pero aclará en el
-informe que ese tipo de lámina todavía no tiene un módulo de criterios específicos
-cargado en la Skill, para que el usuario sepa que la revisión fue más general de lo
-que podría ser:
+ver nota dentro del módulo).**
 
-- Detalles constructivos
-- Láminas combinadas planta-corte-detalle
+De los 7 tipos de lámina previstos originalmente en la arquitectura, los 2
+restantes **no se desarrollan como módulos aparte**, a propósito:
+
+- **Detalles constructivos** (genérico, no cordón cuneta ni sumideros — esos ya
+  tienen módulo propio): no hay contenido de dominio nuevo que no esté ya cubierto
+  por `checklist-technical-quality.md` y `checklist-presentation.md`. Si aparece un
+  detalle real de un elemento sin módulo propio (una defensa vehicular, un vado,
+  señalización), se evalúa en ese momento si amerita su propio módulo.
+- **Láminas combinadas planta-corte-detalle**: no es un tipo de contenido, es una
+  cuestión de layout (una hoja que mezcla varias vistas). Ver `SKILL.md` → paso 2:
+  cada vista de la hoja se identifica y revisa con el módulo que le corresponda.
+
+Si te toca revisar un tipo de lámina de una disciplina que todavía no está cargada
+acá (estructura, arquitectura, instalaciones), aplicá igual los cinco checklists
+transversales (`references/checklist-*.md`) y el marco de `review-framework.md`,
+pero aclará en el informe que esa disciplina todavía no tiene criterios específicos
+en la Skill.
 
 ---
 

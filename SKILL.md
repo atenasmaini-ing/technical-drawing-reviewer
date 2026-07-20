@@ -66,6 +66,12 @@ requiere datos exactos, no una impresión.
 Cada hoja puede ser de un tipo distinto (planta, perfil, detalle, etc.), así que
 identificá el tipo por hoja, no por PDF completo.
 
+Una misma hoja puede además combinar más de un tipo de vista (una planta, un corte y
+un detalle, todos en la misma lámina). Eso no es un tipo de lámina aparte: identificá
+cada vista por separado y aplicále el módulo de disciplina que le corresponda a esa
+parte de la hoja. No hace falta un módulo específico de "lámina combinada" — la
+combinación es una cuestión de layout, no de contenido nuevo.
+
 Consultá `references/disciplines/civil-infrastructure.md` — por ahora la única
 disciplina cubierta. Si te encontrás con una lámina que claramente pertenece a otra
 disciplina (estructura, arquitectura, instalaciones, etc.), decilo explícitamente en

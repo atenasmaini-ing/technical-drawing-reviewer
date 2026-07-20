@@ -42,8 +42,13 @@ va a difundir como v1.0.0.
 - Arquitectura modular pensada para sumar disciplinas nuevas (estructura,
   arquitectura, instalaciones) sin reescribir nada existente.
 
+Con esto quedan resueltos los 7 tipos de lámina de obra civil previstos: 5 con
+módulo propio, y 2 ("detalles constructivos" genérico, "láminas combinadas
+planta-corte-detalle") resueltos como principios transversales cortos en vez de
+módulos completos, porque no tenían contenido de dominio propio que no estuviera
+ya cubierto — evitamos construir un módulo solo para tener uno.
+
 **Planeado antes de v1.0.0:**
-- Módulos restantes de obra civil: detalles constructivos, láminas combinadas.
 - Validar "perfiles longitudinales" (dentro del módulo de perfiles) contra un
   plano real — hoy se basa solo en conocimiento general, sin el mismo contraste
   que el resto del contenido.
