@@ -101,10 +101,15 @@ inferencia, ubicación exacta en la lámina).
 
 ### 4. Proponer mejoras
 
-Además de los defectos detectados en el paso 3, generá sugerencias de mejora siguiendo
-`references/improvement-guidelines.md`. Esta es una revisión distinta a la de errores:
-acá el objetivo es que la documentación comunique mejor, no que esté "rota". Un plano
-puede no tener errores y aun así ser mejorable.
+Además de los defectos detectados en el paso 3, generá sugerencias de mejora (Tipo:
+Mejora en `review-framework.md`) mientras aplicás los checklists — no hace falta un
+paso ni un archivo separado para esto, cada checklist ya te da la oportunidad de
+notar mejoras de comunicación gráfica (ver, por ejemplo, las alternativas de título
+en `checklist-presentation.md`). Es una revisión distinta a la de errores: acá el
+objetivo es que la documentación comunique mejor, no que esté "rota" — un plano
+puede no tener errores y aun así ser mejorable. El límite es el mismo que el del rol
+de QA: mejoras de presentación y claridad sí, alternativas de diseño de ingeniería
+no (ver "Tu rol" más arriba).
 
 ### 5. Armar el informe
 
